@@ -1,0 +1,60 @@
+
+feature_extraction_pipeline/
+├── mtImageSearch
+│   ├── db
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── redisqueue.py
+│   │   └── redisqueue.pyc
+│   ├── descriptors
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── detectanddescribe.py
+│   │   ├── detectanddescribe.pyc
+│   │   ├── rootsift.py
+│   │   └── rootsift.pyc
+│   ├── indexer
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── baseindexer.py
+│   │   ├── baseindexer.pyc
+│   │   ├── bovwindexer.py
+│   │   ├── bovwindexer.pyc
+│   │   ├── featureindexer.py
+│   │   └── featureindexer.pyc
+│   ├── ir
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── bagofvisualwords.py
+│   │   ├── bagofvisualwords.pyc
+│   │   ├── dists.py
+│   │   ├── dists.pyc
+│   │   ├── searcher.py
+│   │   ├── searcher.pyc
+│   │   ├── searchresult.py
+│   │   ├── searchresult.pyc
+│   │   ├── spatialverifier.py
+│   │   ├── vocabulary.py
+│   │   └── vocabulary.pyc
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── resultsmontage.py
+│   └── resultsmontage.pyc
+├── output
+│   ├── vw_vis
+│   ├── bovw.hdf5
+│   ├── features.hdf5
+│   ├── idf.cpickle
+│   └── vocab.cpickle
+├── build_redis_index.py
+├── cluster_features.py
+├── evaluate.py
+├── evaluate_spatial_verify.py
+├── extract_bovw.py
+├── framework_structure.txt
+├── index_features.py
+├── note.md
+├── quantize_example.py
+├── search.py
+├── search_spatial_verify.py
+└── visualize_centers.py

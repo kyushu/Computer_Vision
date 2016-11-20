@@ -1,0 +1,82 @@
+
+{
+    ###############
+    # DATASET PATH
+    ###############
+
+    # 相對路徑是以執行檔案的位置來看的
+    # 例如 datasets 跟 explore_dims.py 在同一層
+    # python explore_dims --conf ../conf/car.json
+    # 這時對 python 來說要去 ./datasets/caltech101/101_ObjectCategories/car_side 讀
+    "image_dataset": "../datasets/caltech101/101_ObjectCategories/car_side",
+    "image_annotations": "../datasets/caltech101/Annotations/car_side",
+    "image_distractions": "../datasets/sceneclass13",
+
+    #######
+    # FEATURE EXTRACTION
+    #######
+    "features_path": "./output/cars/car_features.hdf5",
+    "percent_gt_images": 0.5,
+    "offset": 5,
+    "use_flip": true,
+    "num_distraction_images": 500,
+    "num_distractions_per_image": 10,
+
+    #######
+    # HISTOGRAM OF ORIENTED GRADIENTS DESCRIPTOR
+    #######
+
+    "orientations": 9,
+    "pixels_per_cell": [4, 4],
+    "cells_per_block": [2, 2],
+    "normalize": true,
+
+    #######
+    # OBJECT DETECTOR
+    #######
+
+    # 透過 explore_dims 統計 car 的幾何特性為
+    # avg-width  = 184 pixel
+    # avg-Height = 62 pixel
+    # ratio      = 2.97
+
+    # 因為以下兩個原因我都會再將計算出來的平均寛高再除以 2 設為 "Sliding-Window" 的大小
+    # 1. HOG feature vectors 會隨著 window size 增大而增加
+    # 2. 在 multi-scale detection 之下,若 window size 太大則會忽略掉 較小的物件
+    #                                 若 window size 太小則會增加運算
+    # 所以將計算出來的平均寛高再除以 2 算是去取得 1 跟 2 的平衡
+
+    # avg-width  = 184 / 2 = 92 pixel
+    # avg-Height = 62  / 2 = 31 pixel
+
+    # 而 "Sliging-Window" 又必需被 HOG 的 pixels-per-cell 跟 cells-per-block 給整除
+    # 通常 pixels-per-cell 都會設為 4 的倍數
+    # 通常 cells-per-block 都會設成 1, 2, 3
+    # 所以調整 "Sliding-Window" 的寛高為
+    # window width  = 96
+    # window height = 32
+    # "Sliging-Window" 需等於 pixels-per-cell
+
+    "window_step": 4,
+    "overlap_thresh": 0.3,
+    "pyramid_scale": 1.5,
+    "window_dim": [96, 32],
+    "min_probability": 0.7,
+
+
+    #######
+    # LINEAR SVM
+    #######
+    "classifier_path": "output/cars/model.cpickle",
+    # larger C indicates that SVM is not allowed to make many mistakes but may cause over-fitting
+    # smaller C allows the SVM make more mistakes
+    "C": 0.01,
+
+    #######
+    # HARD NEGATIVE MINING
+    #######
+    "hn_num_distraction_images": 50,
+    "hn_window_step": 4,
+    "hn_pyramid_scale": 1.5,
+    "hn_min_probability": 0.51
+}

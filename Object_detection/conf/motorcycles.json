@@ -1,0 +1,9 @@
+
+{
+    ###############
+    # DATASET PATH
+    ###############
+    # 相對路徑是以執行的位置來看的
+    "image_dataset": "../datasets/motorcycles/motorbike_images",
+    "image_annotations": "./datasets/motorcycles/motorbike_annotations"
+}
